@@ -1,0 +1,60 @@
+import random
+
+# Quiz questions and answers (you can add more questions here)
+quiz_questions = [
+    {
+        "question": "What is the capital of France?",
+        "options": ["a) London", "b) Paris", "c) Rome", "d) Berlin"],
+        "answer": "b"
+    },
+    {
+        "question": "Who painted the Mona Lisa?",
+        "options": ["a) Pablo Picasso", "b) Vincent van Gogh", "c) Leonardo da Vinci", "d) Michelangelo"],
+        "answer": "c"
+    },
+    # Add more questions here
+]
+
+def load_quiz_questions():
+    random.shuffle(quiz_questions)
+
+def display_welcome_message():
+    print("Welcome to the Quiz Game!")
+    print("You will be asked multiple-choice questions on a specific topic.")
+    print("Select the correct answer by entering the corresponding letter.")
+
+def present_quiz_questions():
+    score = 0
+    for index, question_data in enumerate(quiz_questions):
+        print(f"\nQuestion {index + 1}: {question_data['question']}")
+        for option in question_data['options']:
+            print(option)
+        
+        user_answer = input("Your answer (enter a, b, c, or d): ").lower()
+        
+        if user_answer == question_data['answer']:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Incorrect! The correct answer is {question_data['answer']}.")
+
+    return score
+
+def display_final_results(score):
+    print(f"\nYour final score is: {score} out of {len(quiz_questions)}.")
+
+def play_again():
+    return input("Do you want to play again? (yes/no): ").lower().startswith('y')
+
+def main():
+    while True:
+        load_quiz_questions()
+        display_welcome_message()
+        score = present_quiz_questions()
+        display_final_results(score)
+        
+        if not play_again():
+            break
+
+if __name__ == "__main__":
+    main()
